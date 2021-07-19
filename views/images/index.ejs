@@ -11,7 +11,8 @@
     </select>
     <button type "submit">Ara</button>
 </form>
-<br>
-<% images.forEach(image => {%>
-    <div><%= image.url%></div>
-<% }) %>
+<div>
+    <% images.forEach(image => {%>
+        <img width="140" height="150" src = "<%= image.clothingImagePath%>">
+    <% }) %>
+</div>
