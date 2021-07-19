@@ -1,0 +1,17 @@
+<script>
+    $('#categories').val("<%= searchOptions.category%>");
+</script>
+<h2>Görsel Ara</h2>
+<form action = "/images" method = "GET">
+    <label>Kategori</label>
+    <select id="category_names" name="categories">
+        <option value="top">Üst</option>
+        <option value="bottom">Alt</option>
+        <option value="all">Hepsi</option>
+    </select>
+    <button type "submit">Ara</button>
+</form>
+<br>
+<% images.forEach(image => {%>
+    <div><%= image.url%></div>
+<% }) %>
