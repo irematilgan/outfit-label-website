@@ -8,8 +8,8 @@ router.get('/', async (req, res) => {
     try {
         const imageTops = await ImageObj.find({'category' : 'top'})
         const imageBottoms = await ImageObj.find({'category' : 'bottom'})
-        params.imageTop = imageTops.length > 0? path.join('/','uploads/images',imageTops[0].imageName) : null
-        params.imageBottom = imageBottoms.length > 0? path.join('/','uploads/images',imageBottoms[0].imageName) : null
+        params.imageTop = imageTops.length > 0? imageTops[0].clothingImagePath : null
+        params.imageBottom = imageBottoms.length > 0? imageBottoms[0].clothingImagePath : null
         
         
         renderHomePage(res, params)
@@ -25,7 +25,6 @@ function renderHomePage(res, params, hasError = false) {
         params = {}
         params.errorMessage = "Sayfa gösterilirken hata oluştu."
     }
-    console.log(params)
     res.render('index', params); 
 }
 

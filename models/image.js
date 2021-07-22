@@ -1,23 +1,24 @@
 const mongoose = require('mongoose')
-const path = require('path')
-const clothingImageBasePath = 'uploads/images'
 
 const imageSchema = new mongoose.Schema({
     category : {
         type : String,
         required : true
     },
-    imageName : {
+    clothingImage : {
+        type : Buffer,
+        required : true
+    },
+    clothingImageType : {
         type : String,
         required : true
-    }
+    },
 }, {timestamps : true})
 
 imageSchema.virtual('clothingImagePath').get(function() {
-    if(this.imageName != null) {
-        return path.join('/',clothingImageBasePath,this.imageName)
+    if(this.clothingImage != null && this.clothingImageType != null) {
+        return `data:${this.clothingImageType};charset=utf-8;base64,${this.clothingImage.toString('base64')}`
     }
 })
 
 module.exports = mongoose.model('ImageObj',imageSchema)
-module.exports.clothingImageBasePath = clothingImageBasePath
