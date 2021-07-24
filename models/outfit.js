@@ -1,12 +1,12 @@
 const mongoose = require('mongoose')
 const ImageObj = require('../models/image')
 const outfitSchema = mongoose.Schema({
-    imageNameTop : {
+    imageTop : {
         required : true,
         type : mongoose.Schema.Types.ObjectId,
         ref : 'ImageObj'
     },
-    imageNameBottom : {
+    imageBottom : {
         required : true,
         type : mongoose.Schema.Types.ObjectId,
         ref : 'ImageObj'

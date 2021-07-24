@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const ImageObj = require('../models/image')
-
 // const uploadPath = path.join('public',ImageObj.clothingImageBasePath)
 const imageMimeTypes = ['image/jpeg','image/png']
 // const multer = require('multer');
@@ -83,6 +82,23 @@ router.post('/', async (req,res) => {
     //    }
     //})
     
+})
+
+router.delete('/:id', async (req,res) => {
+    let img
+    console.log("deneme")
+    try {
+        img = await ImageObj.findById(req.params.id)
+        await img.remove()
+        res.redirect(`/images`)
+    } catch (error){
+        console.log(error)
+        if(img == null) {
+            res.redirect('/')
+        } else {
+            res.redirect(`/images/${img.id}`)
+        }
+    }
 })
 
 // function removeImage(fileName) {

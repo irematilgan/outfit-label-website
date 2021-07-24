@@ -14,5 +14,6 @@
 <div>
     <% images.forEach(image => {%>
         <img width="140" height="150" src = "<%= image.clothingImagePath%>">
+        <%- include('../partials/deleteForm', {url : `/images/${image.id}`})%>
     <% }) %>
 </div>

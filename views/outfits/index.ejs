@@ -1,0 +1,12 @@
+<h2>Tüm Kombinler</h2>
+<% outfits.forEach(outfit => {%>
+<div>
+    <img width="140" height="150" src = "<% if(errorMessage == null) {%><%=outfit.imageTopImg%><%}%>">
+</div>
+<div>
+    <img width="140" height="150" src = "<% if(errorMessage == null) {%><%=outfit.imageBottomImg%><%}%>">
+</div>
+<div>
+    <h4><%=outfit.score%></h4>
+</div>
+<%})%>

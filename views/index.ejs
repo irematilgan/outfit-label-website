@@ -1,12 +1,14 @@
 <h2>Kombinler</h2>
-<input type="number" min = 0 max = 10 name = "compScore" value = 0>
-<div>
-    <img width="140" height="150" src = "<% if(errorMessage == null) {%><%=imageTop%><%}%>">
-</div>
-<div>
-    <img width="140" height="150" src = "<% if(errorMessage == null) {%><%=imageBottom%><%}%>">
-</div>
-<div>
-    <button type = "submit" name = "saveOutfitButton">Kaydet</button>
-    <button type = "reset" name = "randomOutfitButton">Değiştir</button>
-</div>
+<form action = "/new" method = "POST">
+    <input type="number" min = 0 max = 10 name = "compScore" value = 0>
+    <div>
+        <img width="140" height="150" src = "<% if(errorMessage == null) {%><%=imageTop%><%}%>">
+    </div>
+    <div>
+        <img width="140" height="150" src = "<% if(errorMessage == null) {%><%=imageBottom%><%}%>">
+    </div>
+    <div>
+        <button type = "submit" name = "outfitButton" value = "Save">Kaydet</button>
+        <button type = "submit" name = "outfitButton" value = "Randomize">Değiştir</button>
+    </div>
+</form>
