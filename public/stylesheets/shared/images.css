@@ -1,7 +1,7 @@
 :root{
     --image-view-width : 200px;
     --image-view-width-large : 275px;
-    --image-view-aspect-ratio : 0.8;
+    --image-view-aspect-ratio : 0.80;
 }
 
 .image-view{
