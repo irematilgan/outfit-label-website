@@ -1,0 +1,13 @@
+
+<% imageViewClass = locals.large ? 'image-view-large' : ''%>
+<% imageGridClass = locals.large ? 'image-grid-large' : ''%>
+<div class = "image-grid <%=imageGridClass%>">
+    <% images.forEach(image => {%>
+        <div class = "form-row">
+            <div class = "form-item">
+                <img class = "image-view <%=imageViewClass%>" src = "<%= image.clothingImagePath%>">
+            </div>
+            <%- include('../partials/deleteForm', {url : `/images/${image.id}`})%>
+        </div>
+    <% }) %>
+</div>

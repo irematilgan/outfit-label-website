@@ -1,19 +1,23 @@
 <script>
     $('#categories').val("<%= searchOptions.category%>");
 </script>
-<h2>Görsel Ara</h2>
+<h2 class = "page-header">Görsel Ara</h2>
 <form action = "/images" method = "GET">
-    <label>Kategori</label>
-    <select id="category_names" name="categories">
-        <option value="top">Üst</option>
-        <option value="bottom">Alt</option>
-        <option value="all">Hepsi</option>
-    </select>
-    <button type "submit">Ara</button>
+    <div class = "form-row">
+        <div class = "form-item">
+            <label>Kategori</label>
+            <select id="category_names" name="categories">
+                <option value="top">Üst</option>
+                <option value="bottom">Alt</option>
+                <option value="all">Hepsi</option>
+            </select>
+        </div>
+
+    </div>
+    <div class="form-row form-row-end btn-row">
+        <button class = "btn btn-primary" type = "submit">Ara</button>
+    </div>
 </form>
-<div>
-    <% images.forEach(image => {%>
-        <img width="140" height="150" src = "<%= image.clothingImagePath%>">
-        <%- include('../partials/deleteForm', {url : `/images/${image.id}`})%>
-    <% }) %>
-</div>
+
+<%- include('../partials/imageGrid', {images : images, large : true})%>
+

@@ -1,12 +1,25 @@
-<h2>Tüm Kombinler</h2>
+<h2 class = "page-header">Tüm Kombinler</h2>
 <% outfits.forEach(outfit => {%>
-<div>
-    <img width="140" height="150" src = "<% if(errorMessage == null) {%><%=outfit.imageTopImg%><%}%>">
-</div>
-<div>
-    <img width="140" height="150" src = "<% if(errorMessage == null) {%><%=outfit.imageBottomImg%><%}%>">
-</div>
-<div>
-    <h4><%=outfit.score%></h4>
+<div class = "outfit-row">
+    <div class = "image-grid ">
+        <div class = "form-row">
+            <div class = "form-item">
+                <img class = "image-view " src = "<% if(errorMessage == null) {%><%=outfit.imageTopImg%><%}%>">
+            </div>
+            <div class = "form-item">
+                <img class = "image-view " src = "<% if(errorMessage == null) {%><%=outfit.imageBottomImg%><%}%>">
+            </div>
+            <div class = "form-item">
+                <div class = "outfit-score-header"><h3>Kombin Puanı</h3></div>
+                <div class = "outfit-score">
+                    <h4><%=outfit.score%></h4>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <div class = "outfit-button">
+        <%- include('../partials/deleteForm', {url : `/outfits/${outfit.id}`})%>
+    </div>
 </div>
 <%})%>

@@ -1,6 +1,11 @@
-<h2>Yeni Kıyafet</h2>
+<h2 class = "page-header">Yeni Kıyafet</h2>
+<br>
 <form action = "/images" method = "POST">
     <%- include('_form_fields') %>
-    <a href = "/images">Vazgeç</a>
-    <button type = "submit">Oluştur</button>
+    <div class = "form-row form-row-end btn-row">
+        <a class = "btn btn-danger" href = "/images">Vazgeç</a>
+        <button class = "btn btn-primary" type = "submit">Oluştur</button>
+    </div>
+    
+    
 </form>

@@ -1,12 +1,17 @@
-<label>Kategori</label>
-<select id="category_names" name="categories">
-    <option value="top">Üst</option>
-    <option value="bottom">Alt</option>
-</select>
-<div>
-    <label>
-        Kıyafet Fotoğrafı
-    </label>
-    <input type = "file" name = "clothingImage" class = "filepond">
+<div class = "form-row form-row-new">
+    <div class = "form-item form-item-no-grow-new">
+        <label>
+            Kıyafet Fotoğrafı
+        </label>
+        <br>
+        <input type = "file" name = "clothingImage" class = "filepond image-view">
+    </div>
+    <div class = "form-item form-item-no-grow">
+        <label>Kategori</label>
+        <select id="category_names" name="categories">
+            <option value="top">Üst</option>
+            <option value="bottom">Alt</option>
+        </select>
+    </div>
 </div>
-<!--<input type = "text" name = "category" value = "<%= image.category%>">-->
+

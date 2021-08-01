@@ -1,0 +1,24 @@
+.outfit-row {
+    display : flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.outfit-score-header {
+    font-size : 1.5rem;
+    justify-content: center;
+    margin-left: 2.5rem;
+    text-align: center;
+}
+
+.outfit-score {
+    font-size : 1.5rem;
+    justify-content: center;
+    margin-left: 5.25rem;
+}
+
+.outfit-button {
+    display: block;
+    margin-bottom: auto;
+    margin-top: auto;
+}

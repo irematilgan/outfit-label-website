@@ -16,7 +16,8 @@ router.get('/', async (req,res) => {
             outfitArr.push({
                 imageTopImg : imageTop.clothingImagePath,
                 imageBottomImg : imageBottom.clothingImagePath,
-                score : outfits[i].score
+                score : outfits[i].score,
+                id : outfits[i].id
             })
             
         }
@@ -25,6 +26,18 @@ router.get('/', async (req,res) => {
     } catch (error) {
         console.log(error)
         res.render('./outfits/index', {errorMessage : 'Kombinler cagrilamadi'})
+    }
+})
+
+router.delete('/:id', async (req,res) => {
+    let outfit;
+    try{
+        outfit = await Outfit.findById(req.params.id)
+        await outfit.remove()
+        res.redirect('/outfits')
+    } catch (err){
+        console.log(err)
+        res.redirect(`/outfits/${outfit.id}`)
     }
 })
 

@@ -1,14 +1,26 @@
-<h2>Kombinler</h2>
+<h2 class = "page-header">Kombinler</h2>
 <form action = "/new" method = "POST">
-    <input type="number" min = 0 max = 10 name = "compScore" value = 0>
-    <div>
-        <img width="140" height="150" src = "<% if(errorMessage == null) {%><%=imageTop%><%}%>">
-    </div>
-    <div>
-        <img width="140" height="150" src = "<% if(errorMessage == null) {%><%=imageBottom%><%}%>">
-    </div>
-    <div>
-        <button type = "submit" name = "outfitButton" value = "Save">Kaydet</button>
-        <button type = "submit" name = "outfitButton" value = "Randomize">Değiştir</button>
+    <div class = "form-row-home">
+        <div class = "form-row-home">
+            <div class = "image-grid-home">
+                <img class = "image-view " src = "<% if(errorMessage == null) {%><%=imageTop%><%}%>">
+            </div>
+        </div>
+        <div class = "form-row-home">
+            <div class = "image-grid-home">
+                <img class = "image-view " src = "<% if(errorMessage == null) {%><%=imageBottom%><%}%>">
+            </div>
+        </div>
+        <div class = "form-row-home">
+            <div class = "form-item form-item-no-grow">
+                <input type="number" min = 0 max = 10 name = "compScore" value = 0>
+            </div>
+        </div>
+        <div class="form-row form-row-end btn-row">
+            <div class = "btn-row">
+                <button class = "btn btn-primary" type = "submit" name = "outfitButton" value = "Save">Kaydet</button>
+                <button class = "btn btn-random" type = "submit" name = "outfitButton" value = "Randomize">Değiştir</button>
+            </div>
+        </div>
     </div>
 </form>

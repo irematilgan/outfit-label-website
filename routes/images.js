@@ -53,21 +53,21 @@ function renderNewPage(res, image, hasError = false) {
 
 // Create image route
 router.post('/', async (req,res) => {
-    const fileName = req.file != null ? req.file.filename : null
-    // console.log(req)
-    const image = new ImageObj({
-        category : req.body.categories,
-        imageName : fileName
-    })
-
-    saveImage(image, req.body.clothingImage)
 
     try {
+        const fileName = req.file != null ? req.file.filename : null
+        // console.log(req)
+        const image = new ImageObj({
+            category : req.body.categories,
+            imageName : fileName
+        })
+    
+        saveImage(image, req.body.clothingImage)
         const newImage = await image.save()
         //res.redirect('images/${newImage.id}')
         res.redirect('images')
     } catch (err) {
-        renderNewPage(res, image, true)
+        renderNewPage(res, null, true)
     }
 
     //image.save((err, newImage) => {
@@ -86,7 +86,7 @@ router.post('/', async (req,res) => {
 
 router.delete('/:id', async (req,res) => {
     let img
-    console.log("deneme")
+ 
     try {
         img = await ImageObj.findById(req.params.id)
         await img.remove()

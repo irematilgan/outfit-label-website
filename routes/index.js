@@ -50,6 +50,8 @@ router.post('/new', async (req,res) => {
             const imageBottomsRand = await ImageObj.find({'category' : 'bottom'})
             const randomResTop = Math.floor(Math.random()*imageTopsRand.length)
             const randomResBottom = Math.floor(Math.random()*imageBottomsRand.length)
+            imageTopId = await imageTopsRand[randomResTop]._id
+            imageBottomId = await imageBottomsRand[randomResBottom]._id
             params.imageTop = imageTopsRand[randomResTop].clothingImagePath
             params.imageBottom = imageBottomsRand[randomResBottom].clothingImagePath
             renderHomePage(res, params)
