@@ -15,11 +15,16 @@
                     <h4><%=outfit.score%></h4>
                 </div>
             </div>
+            <div class="form-item">
+                <div class = "outfit-button">
+                    <%- include('../partials/deleteForm', {url : `/outfits/${outfit.id}`})%>
+                </div>
+            </div>
             
         </div>
+
+        
     </div>
-    <div class = "outfit-button">
-        <%- include('../partials/deleteForm', {url : `/outfits/${outfit.id}`})%>
-    </div>
+
 </div>
 <%})%>

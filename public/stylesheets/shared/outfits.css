@@ -1,6 +1,6 @@
 .outfit-row {
     display : flex;
-    justify-content: space-between;
+    justify-content: center;
     margin-bottom: 1rem;
 }
 
@@ -18,7 +18,7 @@
 }
 
 .outfit-button {
-    display: block;
+    display: flex;
     margin-bottom: auto;
     margin-top: auto;
 }
