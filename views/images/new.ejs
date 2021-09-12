@@ -1,6 +1,15 @@
 <h2 class = "page-header">Yeni Kıyafet</h2>
 <br>
-<form action = "/images" method = "POST">
+<div>
+    <input type="number" min = 2 max = 5 name = "clothesCount" id = "clothesCount" value = 2>
+    <br>
+    <button id = "addFieldButton">Ekle</button>
+</div>
+<br>
+<script>
+    document.getElementById("addFieldButton").addEventListener("click", addImageFields);
+</script>
+<form id = "addOutfitForm" action = "/images" method = "POST">
     <%- include('_form_fields') %>
     <div class = "form-row form-row-end btn-row">
         <a class = "btn btn-danger" href = "/images">Vazgeç</a>

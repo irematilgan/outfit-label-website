@@ -5,6 +5,7 @@ const ImageObj = require('../models/image')
 
 // All outfits route
 router.get('/', async (req,res) => {
+
     params = {}
     let outfitArr = []
 
@@ -28,6 +29,17 @@ router.get('/', async (req,res) => {
         res.render('./outfits/index', {errorMessage : 'Kombinler cagrilamadi'})
     }
 })
+
+
+// Page to add outfit with more than one clothes
+router.get('/new', async(req,res) => {
+    
+});
+
+// Add outfit to the database
+router.post('/', async(req,res) => {
+
+});
 
 router.delete('/:id', async (req,res) => {
     let outfit;

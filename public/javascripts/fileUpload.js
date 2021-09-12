@@ -5,6 +5,7 @@ if (rootStyles.getPropertyValue('--image-view-width-large') != null && rootStyle
   ready();
 } else {
   document.getElementById('main-css').addEventListener('load', ready);
+  //document.getElementById("addFieldButton").addEventListener('click',ready);
 }
 
 function ready() {

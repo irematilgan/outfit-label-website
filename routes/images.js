@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const ImageObj = require('../models/image')
+const Outfit = require('../models/outfit')
 // const uploadPath = path.join('public',ImageObj.clothingImageBasePath)
 const imageMimeTypes = ['image/jpeg','image/png']
 // const multer = require('multer');
@@ -14,7 +15,12 @@ const { param } = require('.');
 // })
 
 
-router.get('/',async (req, res) => {
+function isLoggedIn(req, res, next) {
+    if(req.isAuthenticated()) return next();
+    res.redirect('../login');
+}
+
+router.get('/', isLoggedIn, async (req, res) => {
     let searchOptions = {}
     //ImageObj.remove({category : "alt"}).catch((err) => {
     //    console.log(err)
@@ -39,7 +45,7 @@ router.get('/',async (req, res) => {
 });
 
 // New image route
-router.get('/new',(req, res) => {
+router.get('/new',isLoggedIn,(req, res) => {
     renderNewPage(res, new ImageObj()); 
 });
 
@@ -53,22 +59,81 @@ function renderNewPage(res, image, hasError = false) {
 
 // Create image route
 router.post('/', async (req,res) => {
-
-    try {
-        const fileName = req.file != null ? req.file.filename : null
-        // console.log(req)
-        const image = new ImageObj({
-            category : req.body.categories,
-            imageName : fileName
-        })
     
-        saveImage(image, req.body.clothingImage)
-        const newImage = await image.save()
-        //res.redirect('images/${newImage.id}')
-        res.redirect('images')
+    try {
+        var clothingImgs = req.body.clothingImg;
+        var categories = req.body.categories
+        var clothesLength = clothingImgs.length;
+        const outfit = new Outfit({clothesCounter : clothesLength});
+        for(var i = 0; i < clothesLength; i++) {
+            var image = new ImageObj({
+                category : categories[i],
+                imageName : clothingImgs[i].name
+            });
+            saveImage(image, clothingImgs[i]);
+            outfit.images.push(image);
+            var newImage = await image.save();
+        }
+        const newOutfit = await outfit.save();
+        res.redirect('images');
+
+        // req.pipe(req.busboy);
+        // req.busboy.on('file', function (fieldname, file, filename) {
+        //     console.log(file);
+        //     console.log("Uploading: " + filename); 
+        // });
+        // for (var key in req.body) {
+        //     if (Object.hasOwnProperty.bind(req.body)(key)) {
+        //       item = req.body[key];
+        //       if(Array.isArray(item)) {
+        //         for(var i = 0; i < item.length; i++) {
+        //             if(item[i] == '') {res.redirect('images/new');}
+        //             filenames.push(item[i]);
+        //         }
+        //       } else {
+        //         categories.push(item)
+        //       }
+              
+        //     }
+        // }
+
+        // var images = [];
+        // for(var i = 0; i < filenames.length; i++) {
+        //     var image = new ImageObj({
+        //         category : categories[i],
+        //         imageName : filenames[i]
+        //     });
+        //     saveImage(image, filenames[i]);
+        //     console.log(image);
+        //     images.push(image);
+        // }
+
+        // const outfit = new Outfit({
+        //     images : images,
+        //     clothesCounter : filenames.length
+        // });
+
+        // console.log(outfit);
+        
     } catch (err) {
-        renderNewPage(res, null, true)
+        console.log(err);
     }
+
+    // try {
+    //     const fileName = req.file != null ? req.file.filename : null
+    //     // console.log(req)
+    //     const image = new ImageObj({
+    //         category : req.body.categories,
+    //         imageName : fileName
+    //     })
+    
+    //     saveImage(image, req.body.clothingImage)
+    //     const newImage = await image.save()
+    //     //res.redirect('images/${newImage.id}')
+    //     res.redirect('images')
+    // } catch (err) {
+    //     renderNewPage(res, null, true)
+    // }
 
     //image.save((err, newImage) => {
     //    if (err) {

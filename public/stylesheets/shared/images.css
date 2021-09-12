@@ -9,6 +9,16 @@
     --height : calc(var(--image-view-width) / var(--image-view-aspect-ratio));
 }
 
+/* the border radius of the drop area */
+.filepond--panel-root {
+    border-radius: 0.5em;
+}
+
+/* the border radius of the file item */
+.filepond--item-panel {
+    border-radius: 0.5em;
+}
+
 .image-view-large{
     --width : var(--image-view-width-large);
 }

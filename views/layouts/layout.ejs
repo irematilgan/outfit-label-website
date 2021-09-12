@@ -6,12 +6,90 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
     <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet">
+    <script>
+        function addImageFields() {
+
+            var counter = parseInt(document.getElementById("clothesCount").value);
+            if (isNaN(counter) || counter < 2 || counter > 5)
+            {
+                //check if the input is valid, if not alert.
+                alert("Kiyafet sayisi 2'den az veya 5'ten fazla olamaz");
+            }
+
+            var outfitForm = document.getElementById("addOutfitForm");
+            var containerDiv = document.getElementById("formNewClothing");
+
+            for(var i = 0; i < counter; i++) {
+                var imgDiv = document.createElement("div");
+                var imgInput = document.createElement("input");
+                var imgSelect = document.createElement("select");
+                var inputDiv = document.createElement("div");
+                var selectDiv = document.createElement("div");
+                var imgBr1 = document.createElement("br");
+                var imgBr2 = document.createElement("br");
+
+                imgDiv.setAttribute("class","form-item form-item-no-grow-new");
+                
+                imgInput.setAttribute("type", "file");
+                imgInput.setAttribute("name", "clothingImg");
+                imgInput.setAttribute("class", "filepond");
+
+
+                imgSelect.setAttribute("id","category_names" + (i+1));
+                imgSelect.setAttribute("name","categories");
+                imgSelect.options[0] = new Option('Şapka', "hat");
+                imgSelect.options[1] = new Option('Üst', "top");
+                imgSelect.options[2] = new Option('Alt', "bottom");
+                imgSelect.options[3] = new Option('Ayakkabı', "shoes");
+                imgSelect.options[4] = new Option('Aksesuar', "accessory");
+
+                inputDiv.appendChild(imgInput);
+                selectDiv.appendChild(imgSelect);
+
+                imgDiv.appendChild(inputDiv);
+                imgDiv.appendChild(imgBr1);
+                imgDiv.appendChild(selectDiv);
+                containerDiv.appendChild(imgDiv);
+
+                
+                containerDiv.appendChild(imgBr2);
+            }
+            ready();
+            
+        }
+
+        function ready() {
+            const imgWidth = parseFloat(rootStyles.getPropertyValue('--image-view-width-large'))
+            const aspectRatio = parseFloat(rootStyles.getPropertyValue('--image-view-aspect-ratio'))
+            const imgHeight = imgWidth / aspectRatio
+
+            FilePond.registerPlugin(
+                FilePondPluginImagePreview,
+                FilePondPluginImageResize,
+                FilePondPluginFileEncode,
+                FilePondPluginImageTransform  
+            )
+
+            FilePond.setOptions({
+                allowImageResize : true,
+                imageResizeMode : 'cover',
+                stylePanelAspectRatio : 1 / aspectRatio,
+                imageResizeTargetWidth : imgWidth,
+                imageResizeTargetHeight : imgHeight,
+                credits : false
+            })
+
+            FilePond.parse(document.body);
+        }
+        
+    </script>
     <script defer src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
     <script defer src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
     <script defer src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
     <script src="https://unpkg.com/filepond-plugin-image-transform/dist/filepond-plugin-image-transform.js"></script>
     <script defer src="https://unpkg.com/filepond/dist/filepond.js"></script>
     <script defer src="/javascripts/fileUpload.js"></script>
+
     <link id = "main-css" rel = "stylesheet" href = "/stylesheets/main.css">
     <title>Kıyafet Etiketleme Sistemi</title>
 </head>

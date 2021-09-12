@@ -1,25 +1,58 @@
+
 <h2 class = "page-header">Kombinler</h2>
+<script type="text/javascript">
+        
+    function addHomeImages() {
+
+        const divHome = document.getElementById("divHome");
+        const isFinished = JSON.parse( document.getElementById("script2").getAttribute('arr'));
+        if(isFinished == true) {
+            divHome.innerHTML = "Kombinleri etiketlemeyi tamamladınız! Yardımınız için teşekkür ederiz :)";
+        } else{
+            var imgLength = `<%= imageLen %>`;
+ 
+            var images = JSON.parse( document.getElementById("script").getAttribute('arr'));  
+
+            for(var i = 0; i < imgLength; i++) {
+                var div1 = document.createElement("div");
+                div1.setAttribute("class", "form-row-home");
+                var div2 = document.createElement("div");
+                div2.setAttribute("class", "image-grid-home");
+                var img = document.createElement("img");
+                img.setAttribute("class", "image-view");
+                
+                //alert('<%=images[' + i + ']%>');
+                img.setAttribute("src", images[i]);
+
+                div1.appendChild(div2);
+                div2.appendChild(img);
+                divHome.appendChild(div1);
+                
+            }
+        }
+
+        
+        //alert(`<%= images[0]%>`)
+    }
+    
+
+    document.addEventListener("DOMContentLoaded",addHomeImages);
+</script>
+
+<div id = "script" arr= "<%=JSON.stringify(images)%>"></div>
+<div id = "script2" arr = "<%= finished%>"></div>
+
 <form action = "/new" method = "POST">
-    <div class = "form-row-home">
-        <div class = "form-row-home">
-            <div class = "image-grid-home">
-                <img class = "image-view " src = "<% if(errorMessage == null) {%><%=imageTop%><%}%>">
-            </div>
-        </div>
-        <div class = "form-row-home">
-            <div class = "image-grid-home">
-                <img class = "image-view " src = "<% if(errorMessage == null) {%><%=imageBottom%><%}%>">
-            </div>
-        </div>
+    <div class = "form-row-home" id = "divHome"">
         <div class = "form-row-home">
             <div class = "form-item form-item-no-grow">
-                <input type="number" min = 0 max = 10 name = "compScore" value = 0>
+                <input type="number" min = 1 max = 10 name = "compScore" value = 1>
             </div>
         </div>
         <div class="form-row form-row-center btn-row">
             <div class = "btn-row">
                 <button class = "btn btn-primary" type = "submit" name = "outfitButton" value = "Save">Kaydet</button>
-                <button class = "btn btn-random" type = "submit" name = "outfitButton" value = "Randomize">Değiştir</button>
+                <!-- <button class = "btn btn-random" type = "submit" name = "outfitButton" value = "Randomize">Değiştir</button> -->
             </div>
         </div>
     </div>
