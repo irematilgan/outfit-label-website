@@ -1,9 +1,9 @@
 <h2 class = "page-header">Yeni Kıyafet</h2>
 <br>
-<div>
+<div class = "form-row">
     <input type="number" min = 2 max = 5 name = "clothesCount" id = "clothesCount" value = 2>
     <br>
-    <button id = "addFieldButton">Ekle</button>
+    <button id = "addFieldButton" class = "btn">Ekle</button>
 </div>
 <br>
 <script>
@@ -12,8 +12,7 @@
 <form id = "addOutfitForm" action = "/images" method = "POST">
     <%- include('_form_fields') %>
     <div class = "form-row form-row-end btn-row">
-        <a class = "btn btn-danger" href = "/images">Vazgeç</a>
-        <button class = "btn btn-primary" type = "submit">Oluştur</button>
+        <button class = "btn btn-1 btn-1c" type = "submit">Oluştur</button>
     </div>
     
     

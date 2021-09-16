@@ -5,9 +5,16 @@
     --form-input-background-color : hsl(var(--color-base-hue),100%,31%);
 }
 
+form{
+    display: grid;
+    justify-content: center;
+}
+
 .form-row{
-    display:flex;
+    /* display:flex; */
     margin-bottom: .5rem;
+    display: grid;
+    justify-content: center;
 }
 
 .form-row-new{

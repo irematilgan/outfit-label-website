@@ -1,5 +1,5 @@
 
-<h2 class = "page-header">Kombinler</h2>
+<h2 id = "h2Homepage" class = "page-header">Kombinler</h2>
 <script type="text/javascript">
         
     function addHomeImages() {
@@ -17,7 +17,7 @@
                 var div1 = document.createElement("div");
                 div1.setAttribute("class", "form-row-home");
                 var div2 = document.createElement("div");
-                div2.setAttribute("class", "image-grid-home");
+                div2.setAttribute("class", "image-grid-home img-card");
                 var img = document.createElement("img");
                 img.setAttribute("class", "image-view");
                 
@@ -44,16 +44,16 @@
 
 <form action = "/new" method = "POST">
     <div class = "form-row-home" id = "divHome"">
-        <div class = "form-row-home">
-            <div class = "form-item form-item-no-grow">
-                <input type="number" min = 1 max = 10 name = "compScore" value = 1>
-            </div>
+        <div class = "form-row">
+            <input type="number" min = 1 max = 10 name = "compScore" value = 1>
+            <button class = "btn btn-1 btn-1c" type = "submit" name = "outfitButton" value = "Save">Kaydet</button>
         </div>
-        <div class="form-row form-row-center btn-row">
-            <div class = "btn-row">
-                <button class = "btn btn-primary" type = "submit" name = "outfitButton" value = "Save">Kaydet</button>
-                <!-- <button class = "btn btn-random" type = "submit" name = "outfitButton" value = "Randomize">Değiştir</button> -->
-            </div>
-        </div>
+        <!-- <div class="form-row form-row-center btn-row">
+            
+            <!-- <div class = "btn-row">
+                
+                <button class = "btn btn-random" type = "submit" name = "outfitButton" value = "Randomize">Değiştir</button>
+            </div> 
+        </div> -->
     </div>
 </form>
