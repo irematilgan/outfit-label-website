@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
-function isLoggedIn(req, res, next) {
-    if(req.isAuthenticated()) return true;
-    return false;
-}
 
 router.get('/', (req, res) => {
+    isLoggedIn = false;
+    if(req.isAuthenticated()) {
+        isLoggedIn = true;
+    }
     res.render('about/index', {isLoggedIn : isLoggedIn}); 
 });
 
