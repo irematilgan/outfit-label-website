@@ -41,7 +41,7 @@ router.get("/", isLoggedIn, async (req, res) => {
         var nextOutfit = await Outfit.findOne({_id: {$gt: currentMember.outfitId}}).sort({_id: 1});
         //limit(1)[0]
         //var nextId = db.outfit.find({_id: {$gt: currentMember.outfitId}}).sort({_id: 1 }).limit(1)
-        console.log("CURRENT ID : " + currentMember.outfitId);
+        //console.log("CURRENT ID : " + currentMember.outfitId);
         
         if(nextOutfit == null && currentMember.finished == true) {
             params.finished = true;
@@ -96,7 +96,7 @@ router.post('/new', async (req,res) => {
     if(buttonRes == 'Save') {
         try {
             const currentMember = await Member.findById(req.session.context);
-            console.log(currentMember.outfitId);
+            //console.log(currentMember.outfitId);
             if(currentMember.givenScores == null) {
                 currentMember.givenScores = [];
             }
@@ -159,12 +159,5 @@ function renderHomePage(res, params, hasError = false) {
     res.render('index', params); 
 }
 
-function checkAuthenticated(req, res, next) {
-    console.log(req.isAuthenticated());
-    if (req.isAuthenticated()) {
-        return next()
-    }
-    res.redirect('/login')
-}
 
 module.exports = router;
