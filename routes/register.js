@@ -14,7 +14,7 @@ var sessionChecker = (req, res, next) => {
 };
 
 router.get('/', sessionChecker, async(req,res) => {
-    res.render('./register');
+    res.render('./register', {isLoggedIn : false});
 });
 
 router.post('/', async(req,res) => {

@@ -149,9 +149,9 @@ router.post('/new', async (req,res) => {
 })
 
 function renderHomePage(res, params, hasError = false) {
+    params.isLoggedIn = true;
     params.errorMessage = null
     if(hasError) {
-        params = {}
         params.errorMessage = "Sayfa gösterilirken hata oluştu."
     }
     res.render('index', params); 

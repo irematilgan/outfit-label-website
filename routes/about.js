@@ -1,8 +1,13 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/',(req, res) => {
-    res.render('about/index'); 
+function isLoggedIn(req, res, next) {
+    if(req.isAuthenticated()) return true;
+    return false;
+}
+
+router.get('/', (req, res) => {
+    res.render('about/index', {isLoggedIn : isLoggedIn}); 
 });
 
 module.exports = router;

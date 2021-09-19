@@ -41,7 +41,7 @@ function isLoggedOut(req, res, next) {
 }
 
 router.get('/', isLoggedOut, function(req,res){
-    res.render('./login', {errorMessage : null});
+    res.render('./login', {errorMessage : null, isLoggedIn : false});
 });
 
 router.post('/', function(req, res, next) {

@@ -35,7 +35,8 @@ router.get('/', isLoggedIn, async (req, res) => {
         // console.log(images)
         res.render('images/index',{
             images : images,
-            searchOptions : searchOptions
+            searchOptions : searchOptions,
+            isLoggedIn : true
             //searchOptions : req.query
         })
 
@@ -51,7 +52,8 @@ router.get('/new',isLoggedIn,(req, res) => {
 
 function renderNewPage(res, image, hasError = false) {
     const params = {
-        image : image
+        image : image, 
+        isLoggedIn : true
     }
     if(hasError) params.errorMessage = 'Kıyafet eklenirken hata oluştu'
     res.render('images/new', params)
