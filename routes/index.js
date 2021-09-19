@@ -25,57 +25,55 @@ router.get("/", isLoggedIn, async (req, res) => {
         const currentMember = await Member.findById(req.session.context);
 
         params.finished = false;
-
+        hasLength = true;
         if(currentMember.outfitId == '0') {
             const outfits = await Outfit.find({})
             if(outfits.length != 0) {
                 currentMember.outfitId = outfits[0].id;   
                 await Member.updateOne({_id : currentMember.id}, {$set : currentMember});
             } else {
+                hasLength = false;
                 res.redirect('./images/new');
             }
 
         } 
 
-        var outfit = await Outfit.findById(currentMember.outfitId);
-        var nextOutfit = await Outfit.findOne({_id: {$gt: currentMember.outfitId}}).sort({_id: 1});
-        //limit(1)[0]
-        //var nextId = db.outfit.find({_id: {$gt: currentMember.outfitId}}).sort({_id: 1 }).limit(1)
-        //console.log("CURRENT ID : " + currentMember.outfitId);
-        
-        if(nextOutfit == null && currentMember.finished == true) {
-            params.finished = true;
-            params.imageLen = 0;
-            params.images = [];
-            renderHomePage(res,params)
-        } else {
-            if (currentMember.finished == true){
-                currentMember.finished = false;
-                currentMember.outfitId = nextOutfit._id;
-                await Member.updateOne({_id : currentMember._id}, {$set : currentMember});
-                outfit = nextOutfit;
-            }
-            if(nextOutfit != null) {
-                console.log("NEXT ID : " + nextOutfit._id);
-            }
+        if(hasLength)
+        {
+            var outfit = await Outfit.findById(currentMember.outfitId);
+            var nextOutfit = await Outfit.findOne({_id: {$gt: currentMember.outfitId}}).sort({_id: 1});
+    
             
-            
-            const imageIds = outfit.images;
-            params.images = [];
-            for(var i = 0; i < imageIds.length; i++) {
-                var img = await ImageObj.findById(imageIds[i]);
-                params.images.push(img.clothingImagePath);
-            }
-            params.imageLen = imageIds.length
-            
-            renderHomePage(res,params);
+            if(nextOutfit == null && currentMember.finished == true) {
+                params.finished = true;
+                params.imageLen = 0;
+                params.images = [];
+                renderHomePage(res,params)
+            } else {
+                if (currentMember.finished == true){
+                    currentMember.finished = false;
+                    currentMember.outfitId = nextOutfit._id;
+                    await Member.updateOne({_id : currentMember._id}, {$set : currentMember});
+                    outfit = nextOutfit;
+                }
+                if(nextOutfit != null) {
+                    console.log("NEXT ID : " + nextOutfit._id);
+                }
+                
+                
+                const imageIds = outfit.images;
+                params.images = [];
+                for(var i = 0; i < imageIds.length; i++) {
+                    var img = await ImageObj.findById(imageIds[i]);
+                    params.images.push(img.clothingImagePath);
+                }
+                params.imageLen = imageIds.length
+                
+                renderHomePage(res,params);
         }
         
+    }
         
-        
-
-        
-
         // const imageTops = await ImageObj.find({'category' : 'top'})
         // const imageBottoms = await ImageObj.find({'category' : 'bottom'})
         // imageTopId = await imageTops.length > 0? imageTops[0]._id : null
