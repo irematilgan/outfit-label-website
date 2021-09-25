@@ -1,10 +1,23 @@
-.outfit-row {
+/* .outfit-row {
     display : flex;
     margin-top: 4rem;
     margin-bottom: 1rem;
+} */
+
+/* .outfit-container {
+
+} */
+
+.outfit-row {
+    display: flex;
+    justify-content: space-between;
+    column-gap: 2rem;
+    margin-top: 2rem;
+
+
 }
 
-.outfit-score-header {
+/* .outfit-score-header {
     font-size : 1.5rem;
     justify-content: center;
     margin-left: 2.5rem;
@@ -21,4 +34,4 @@
     display: flex;
     margin-bottom: auto;
     margin-top: auto;
-}
+} */

@@ -1,30 +1,81 @@
 <h2 class = "page-header">Tüm Kombinler</h2>
-<% outfits.forEach(outfit => {%>
-<div class = "outfit-row">
-    <div class = "image-grid ">
-        <div class = "form-row">
-            <div class = "form-item">
+<%var i = 0%>
+<div class = "outfit-container">
+    <% outfits.forEach(outfit => {%>
+
+        <div class = "outfit-row">
+            <% outfit.images.forEach(img => {%>
+                <div class = "image-grid-home img-card">
+                    <img class = "image-view " src = "<%=img%>">
+                </div>
+            <%})%>
+            <!-- <div class = "form-item">
                 <img class = "image-view " src = "<% if(errorMessage == null) {%><%=outfit.imageTopImg%><%}%>">
             </div>
             <div class = "form-item">
                 <img class = "image-view " src = "<% if(errorMessage == null) {%><%=outfit.imageBottomImg%><%}%>">
-            </div>
-            <div class = "form-item">
+            </div> -->
+            <div>
+
                 <div class = "outfit-score-header"><h3>Kombin Puanı</h3></div>
-                <div class = "outfit-score">
-                    <h4><%=outfit.score%></h4>
-                </div>
+                <!-- <select id="score_options" name="scoreOpts">
+                    <option value="score1">1</option>
+                    <option value="score2">2</option>
+                    <option value="score3">3</option>
+                    <option value="score4">4</option>
+                    <option value="score5">5</option>
+                    <option value="score6">6</option>
+                    <option value="score7">7</option>
+                    <option value="score8">8</option>
+                    <option value="score9">9</option>
+                    <option value="score10">10</option>
+                </select> -->
+                <p style="visibility:hidden" name = "oId<%=i%>"><%=outfit.id%></p>
+                <input type="number" min = 1 max = 10 name = "compScore" value = '<%= outfit.compScore%>' onchange='changeOutfitScore(<%=i%>)'>
             </div>
-            <div class="form-item">
+            
+            
+            <!-- <div class="form-item">
                 <div class = "outfit-button">
                     <%- include('../partials/deleteForm', {url : `/outfits/${outfit.id}`})%>
                 </div>
-            </div>
+            </div> -->
             
         </div>
+        <% i+=1 %>
 
-        
-    </div>
+    <%})%>
+    <script>
+        function changeOutfitScore(i) {
+            //alert('it changed!');
+            //alert(i);
+            //alert(i);
+            //alert("oId" + String(i));
+            
+            //alert(document.getElementsByName("compScore")[i].value);
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST","/outfits");
+            xhr.setRequestHeader('Content-Type','application/json');
+            xhr.send(JSON.stringify({
+                newScore : document.getElementsByName("compScore")[i].value,
+                outfitId : document.getElementsByName("oId" + String(i))[0].innerHTML
+            }));
+            // $.post('/outfits');
+        }
 
+        // document.addEventListener('DOMContentLoaded', () => {
+        //     inputs = document.getElementsByName('compScore');
+        //     for(var i = 0; i < inputs.length; i++) {
+        //         inputs[i].addEventListener('change',changeOutfitScore(inputs[i].value));
+        //         // inputs[i].addEventListener('change',function(event) {
+        //         //     alert(inputs[i].value)
+        //         //     if( inputs[i]('compScore').value !== this.value ) {
+        //         //         alert( 'new value differs' );
+        //         //     }
+        //         // }, false);
+        //     }
+        // });
+
+
+    </script>
 </div>
-<%})%>

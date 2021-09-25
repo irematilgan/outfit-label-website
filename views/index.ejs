@@ -5,10 +5,12 @@
     function addHomeImages() {
 
         const divHome = document.getElementById("divHome");
+        const divInfo = document.getElementById("divInfo");
         const isFinished = JSON.parse( document.getElementById("script2").getAttribute('arr'));
         if(isFinished == true) {
             divHome.innerHTML = "Kombinleri etiketlemeyi tamamladınız! Yardımınız için teşekkür ederiz :)";
         } else{
+            divInfo.innerHTML = "Lütfen hazırlanmış kombinlere 1-10 aralığında puan veriniz"
             var imgLength = `<%= imageLen %>`;
  
             var images = JSON.parse( document.getElementById("script").getAttribute('arr'));  
@@ -44,6 +46,7 @@
 
 <form action = "/new" method = "POST">
     <div class = "form-row-home" id = "divHome"">
+        <div id = "divInfo"></div>
         <div class = "form-row">
             <input type="number" min = 1 max = 10 name = "compScore" value = 1>
             <button class = "btn btn-1 btn-1c" type = "submit" name = "outfitButton" value = "Save">Kaydet</button>
