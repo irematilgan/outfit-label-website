@@ -66,7 +66,7 @@ app.use('/', indexRouter)
 //app.use('/images', imageRouter)
 app.use('/about', aboutRouter)
 app.use('/outfits', outfitRouter)
-//app.use('/register', registerRouter)
+app.use('/register', registerRouter)
 
 app.get('/logout', (req, res) => {
     req.logout();
