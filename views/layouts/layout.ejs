@@ -22,6 +22,7 @@
             for(var i = 0; i < counter; i++) {
                 var imgDiv = document.createElement("div");
                 var imgInput = document.createElement("input");
+                var imgIdInput = document.createElement("input");
                 var imgSelect = document.createElement("select");
                 var inputDiv = document.createElement("div");
                 var selectDiv = document.createElement("div");
@@ -34,6 +35,7 @@
                 imgInput.setAttribute("name", "clothingImg");
                 imgInput.setAttribute("class", "filepond");
 
+                imgIdInput.setAttribute("name", "clothingId");
 
                 imgSelect.setAttribute("id","category_names" + (i+1));
                 imgSelect.setAttribute("name","categories");
@@ -44,6 +46,7 @@
                 imgSelect.options[4] = new Option('Aksesuar', "accessory");
 
                 inputDiv.appendChild(imgInput);
+                inputDiv.appendChild(imgIdInput);
                 selectDiv.appendChild(imgSelect);
 
                 imgDiv.appendChild(inputDiv);

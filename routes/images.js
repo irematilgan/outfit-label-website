@@ -64,20 +64,65 @@ router.post('/', async (req,res) => {
     
     try {
         var clothingImgs = req.body.clothingImg;
-        var categories = req.body.categories
+        var clothingIds = req.body.clothingId;
+        var categories = req.body.categories;
         var clothesLength = clothingImgs.length;
         const outfit = new Outfit({clothesCounter : clothesLength});
-        for(var i = 0; i < clothesLength; i++) {
-            var image = new ImageObj({
-                category : categories[i],
-                imageName : clothingImgs[i].name
-            });
-            saveImage(image, clothingImgs[i]);
-            outfit.images.push(image);
-            var newImage = await image.save();
-        }
-        const newOutfit = await outfit.save();
-        res.redirect('images');
+        // Outfit.find({clothingImgIds : clothingIds},function(err, outfitFound) {
+        //     if(err) {
+        //         console.log(err)
+        //     } else{
+        //         console.log(outfitFound);
+        //         if(outfitFound.length > 0) {
+        //             console.log('Kombin mevcut!..');
+        //             res.send('Kombin mevcut!..');
+        //             //res.redirect('images/new');
+        //             //renderNewPage(res, null, true);
+        //         }
+        //     }
+
+
+        // });
+        Outfit.find({clothingImgIds : clothingIds}).then(async outfitFound => {
+            if(outfitFound.length > 0) {
+                console.log('Kombin mevcut!..');
+                //res.send('Kombin mevcut!..');
+                return renderNewPage(res, null, true);
+            } else {
+                for(var i = 0; i < clothesLength; i++) {
+
+                    var image = new ImageObj({
+                        category : categories[i],
+                        imageName : clothingImgs[i].name,
+                        clothingId : clothingIds[i]
+                    });
+        
+                    saveImage(image, clothingImgs[i]);
+                    outfit.images.push(image);
+                    outfit.clothingImgIds.push(clothingIds[i])
+                    var newImage = await image.save();
+                }
+                const newOutfit = await outfit.save();
+                return res.redirect('images');
+            }
+        });
+        // for(var i = 0; i < clothesLength; i++) {
+
+        //     var image = new ImageObj({
+        //         category : categories[i],
+        //         imageName : clothingImgs[i].name,
+        //         clothingId : clothingIds[i]
+        //     });
+        //     console.log(image);
+
+        //     saveImage(image, clothingImgs[i]);
+        //     outfit.images.push(image);
+        //     outfit.clothingImgIds.push(clothingIds[i])
+        //     console.log(outfit);
+        //     var newImage = await image.save();
+        // }
+        // const newOutfit = await outfit.save();
+        // return res.redirect('images');
 
         // req.pipe(req.busboy);
         // req.busboy.on('file', function (fieldname, file, filename) {

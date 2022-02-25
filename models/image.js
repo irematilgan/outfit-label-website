@@ -7,6 +7,10 @@ const imageSchema = new mongoose.Schema({
         type : String,
         required : true
     },
+    clothingId : {
+        type : String,
+        required : false
+    },
     clothingImage : {
         type : Buffer,
         required : true

@@ -23,6 +23,12 @@ const outfitSchema = new mongoose.Schema({
         required : true,
         type : Number
     },
+    clothingImgIds : [{
+        required : false,
+        type : mongoose.Schema.Types.String,
+        default : []
+    }]
+    ,
     givenMembers : [memberReference]
 },{timestamps : true})
 
